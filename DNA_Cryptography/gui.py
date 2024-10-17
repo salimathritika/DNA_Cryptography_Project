@@ -1,47 +1,72 @@
-import tkinter as tk
-from dna_encoding import encode_to_dna, decode_from_dna, encoding_table, reverse_table
+from tkinter import *
+from PIL import Image, ImageTk
+from dna_encrypt import dna_encrypt_with_key
+from dna_decrypt import dna_decrypt_with_key
+from key_generation import generate_dynamic_key
 
-# Define the GUI
-def create_gui():
-    window = tk.Tk()
-    window.title("Enhanced DNA Cryptography")
+key=generate_dynamic_key(4)
 
-    # Input field for plaintext or DNA
-    tk.Label(window, text="Enter Plaintext (for encryption) or Encrypted DNA (for decryption):").pack()
-    input_field = tk.Entry(window, width=60)
-    input_field.pack()
+def encrypt_text():
+    Encrypted_field.delete(0, END)
+    pt=Encryption_field.get()
+    enc=dna_encrypt_with_key(pt,key)
+    Encrypted_field.insert(10,enc)
 
-    # Result display (Text widget for easier copying)
-    result_label = tk.Label(window, text="Result:")
-    result_label.pack()
-    result_display = tk.Text(window, height=2, width=40, wrap='word')
-    result_display.pack()
+def decrypt_text():
+    ct=Decryption_field.get()
+    if ct:
+        Decrypted_field.delete(0, END)
+        dec=dna_decrypt_with_key(ct,key)
+        Decrypted_field.insert(10,dec)
 
-    # Function to encrypt the input text
-    def encrypt_text():
-        plaintext = input_field.get()
-        if plaintext:
-            encrypted_dna = encode_to_dna(plaintext, encoding_table)
-            result_display.delete('1.0', tk.END)
-            result_display.insert(tk.END, encrypted_dna)
+def clear_enc():
+    Encrypted_field.delete(0,END)
+    Encryption_field.delete(0,END)
 
-    # Function to decrypt the input DNA
-    def decrypt_text():
-        encrypted_dna = input_field.get()
-        if encrypted_dna:
-            decrypted_text = decode_from_dna(encrypted_dna, reverse_table)
-            result_display.delete('1.0', tk.END)
-            result_display.insert(tk.END, decrypted_text)
+def clear_dec():
+    Decrypted_field.delete(0,END)
+    Decryption_field.delete(0,END)
 
-    # Buttons for encryption and decryption
-    encrypt_button = tk.Button(window, text="Encrypt", command=encrypt_text)
-    encrypt_button.pack(side=tk.LEFT, padx=20)
 
-    decrypt_button = tk.Button(window, text="Decrypt", command=decrypt_text)
-    decrypt_button.pack(side=tk.RIGHT, padx=20)
+if __name__=="__main__":
+    root=Tk()
+    root.title("DNA Cryptography")
+    root.geometry('500x300')
 
-    window.mainloop()
+    #Putting an image as background
+    image=Image.open("background.png")
+    resize_image = image.resize((500, 300))
+    bg= ImageTk.PhotoImage(resize_image)
+    label5 = Label( root, image = bg) 
+    label5.place(x = 0, y = 0)
 
-# Run the GUI
-if __name__ == "__main__":
-    create_gui()
+    #Defining all the labels, text boxes and buttons to be used
+    label1 = Label(root, text = "Enter the text to be encrypted: ", fg = 'white', bg='black',font=("Arial", 11, "bold"))
+    label2 = Label(root, text = "Encrypted text: ", fg = 'white', bg = 'black',font=("Arial", 11, "bold")) 
+    label3 = Label(root, text = "Enter the text to be decrypted:", fg = 'white', bg = 'black',font=("Arial", 11, "bold")) 
+    label4 = Label(root, text = "Decrypted text: ", fg = 'white', bg = 'black',font=("Arial", 11, "bold")) 
+    button1 = Button(root, text = "Encrypt", bg = "white",  fg = "black",font=("Arial", 11, "bold"), command = encrypt_text) 
+    button3=Button(root,text="Clear",bg = "white",  fg = "black",font=("Arial", 11, "bold"), command = clear_enc)
+    button2 = Button(root, text = "Decrypt", bg = "white",  fg = "black",font=("Arial", 11, "bold"), command = decrypt_text)
+    button4=Button(root,text="Clear",bg = "white",  fg = "black",font=("Arial", 11, "bold"), command = clear_dec)
+    Encryption_field = Entry(root)  
+    Encrypted_field=Entry(root)
+    Decryption_field = Entry(root)  
+    Decrypted_field = Entry(root)
+    
+    #Using the grid method to align all the elements on the window
+    label1.grid(row = 5, column = 0,ipady="10")  
+    Encryption_field.grid(row=5,column=1,ipadx="100")
+    label2.grid(row = 10, column = 0,ipady="10")  
+    Encrypted_field.grid(row=10,column=1,ipadx="100")
+    button1.grid(row=15,column=0,ipady="10")
+    button3.grid(row=15,column=1,ipady="10")
+    label3.grid(row = 30, column = 0,ipady="10") 
+    Decryption_field.grid(row=30,column=1,ipadx="100")
+    label4.grid(row = 35, column = 0,ipady="10")
+    Decrypted_field.grid(row=35,column=1,ipadx="100")
+    button2.grid(row=40,column=0)
+    button4.grid(row=40,column=1)
+
+
+    root.mainloop()
