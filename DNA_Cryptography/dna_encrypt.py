@@ -1,10 +1,11 @@
 import random
 from biological_processes import transcription
+from dna_encoding import encode_to_dna, decode_from_dna, encoding_table, reverse_table
+
 def insert_introns(dna_sequence, intron_length=4):
-    """
-    Inserts introns randomly in the DNA sequence at specific positions to obfuscate the data.
-    Introns are inserted symmetrically in the middle.
-    """
+    #Inserts introns randomly in the DNA sequence at specific positions to obfuscate the data.
+    #Introns are inserted symmetrically in the middle.
+    
     half_len = len(dna_sequence) // 2
     bases = ['A', 'T', 'C', 'G']
 
@@ -27,10 +28,10 @@ def dna_xor(base1, base2):
     return xor_table[(base1, base2)]
 
 
-def dna_encrypt_with_key(dna_sequence,key):
+def dna_encrypt_with_key(pt,key):
     #XOR-based encryption with the DNA sequence using a repeating key.
 
-    #dna_sequence=transcription(dna_sequence)
+    dna_sequence = encode_to_dna(pt, encoding_table)
     encrypted_dna = []
     for i in range(len(dna_sequence)):
         key_base = key[i % len(key)]
