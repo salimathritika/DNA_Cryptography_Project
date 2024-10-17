@@ -1,18 +1,18 @@
 import random
 from biological_processes import reverse_transcription
+from dna_encoding import encode_to_dna, decode_from_dna, encoding_table, reverse_table
+
 
 def remove_introns(dna_sequence, intron_length=4):
-    """
-    Removes the introns inserted in the DNA sequence. Assumes they are in the middle.
-    """
+    #Removes the introns inserted in the DNA sequence. Assumes they are in the middle.
+    
     half_len = len(dna_sequence) // 2
     return dna_sequence[:half_len] + dna_sequence[half_len + intron_length:]
 
 
 def dna_xor(base1, base2):
-    """
-    XOR two DNA bases.
-    """
+    #XOR two DNA bases.
+    
     xor_table = {
         ('A', 'A'): 'A', ('A', 'C'): 'C', ('A', 'G'): 'G', ('A', 'T'): 'T',
         ('C', 'A'): 'C', ('C', 'C'): 'A', ('C', 'G'): 'T', ('C', 'T'): 'G',
@@ -34,6 +34,5 @@ def dna_decrypt_with_key(dna_sequence,key):
     decrypted_dna = ''.join(decrypted_dna)
 
     dec_dna=remove_introns(decrypted_dna)
-    #dec_dna=reverse_transcription(dec_dna)
-
-    return dec_dna
+    dec = decode_from_dna(dec_dna, reverse_table)
+    return dec
