@@ -2,7 +2,6 @@ import socket
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from dna_decrypt import dna_decrypt_with_key
-import random
 from dna_encoding import decode_from_dna, reverse_table
 
 #round=random.randint(1,50)

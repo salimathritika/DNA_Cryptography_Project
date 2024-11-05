@@ -4,9 +4,7 @@ from tkinter import *
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from dna_decrypt import dna_decrypt_with_key
-from key_generation import generate_dynamic_key
-import random
-from dna_encoding import encode_to_dna, encoding_table,decode_from_dna, reverse_table
+from dna_encoding import decode_from_dna, reverse_table
 
 round=16
 

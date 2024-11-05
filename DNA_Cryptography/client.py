@@ -5,7 +5,7 @@ from Crypto.Cipher import PKCS1_OAEP
 from dna_encrypt import dna_encrypt_with_key
 from key_generation import generate_dynamic_key
 import random
-from dna_encoding import encode_to_dna, encoding_table,decode_from_dna, reverse_table
+from dna_encoding import encode_to_dna, encoding_table
 
 #round=random.randint(1,50)
 round=16
