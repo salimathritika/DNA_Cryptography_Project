@@ -2,6 +2,11 @@ import socket
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from dna_decrypt import dna_decrypt_with_key
+import random
+from dna_encoding import decode_from_dna, reverse_table
+
+#round=random.randint(1,50)
+round=16
 
 # Generate RSA keys for secure key exchange
 def generate_rsa_keys():
@@ -39,7 +44,10 @@ def start_server():
     print(f"Received encrypted message: {encrypted_message}")
 
     # Decrypt the message
-    decrypted_message = dna_decrypt_with_key(encrypted_message, symmetric_key)
+    decrypted_message = dna_decrypt_with_key(encrypted_message, symmetric_key, round)
+    decrypted_message= decode_from_dna(decrypted_message, reverse_table)
+    #if len(decrypted_message)%2!=0:
+     #   decrypted_message = decrypted_message[:len(decrypted_message) - 1]
     print(f"Decrypted message: {decrypted_message}")
 
     conn.close()

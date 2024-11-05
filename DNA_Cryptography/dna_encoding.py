@@ -1,3 +1,4 @@
+"""""
 encoding_table = {
     'A': 'GACT', 'B': 'CGTA', 'C': 'TGCA', 'D': 'ATGC', 'E': 'CTGA',
     'F': 'GATC', 'G': 'AGCT', 'H': 'TCGA', 'I': 'GTCA', 'J': 'CAGT',
@@ -7,6 +8,17 @@ encoding_table = {
     'Z': 'TAGC', ' ': 'GGGG', '.': 'AAAA', ',': 'CCCC', '?': 'TTTT',
     '0': 'AGGA', '1': 'TCAA', '2': 'CGTC', '3': 'GAAT', '4': 'TCAG',
     '5': 'GAGA', '6': 'CTGC', '7': 'TGGT', '8': 'ACAC', '9': 'CATT'
+}
+"""
+encoding_table = {
+    'A': 'AACC', 'B': 'AAGG', 'C': 'TAAT', 'D': 'TATG', 'E': 'TACC',
+    'F': 'TAGA', 'G': 'CAAT', 'H': 'CATG', 'I': 'CACG', 'J': 'CAGT',
+    'K': 'GAAG', 'L': 'GATA', 'M': 'GACG', 'N': 'GAGG', 'O': 'AATA',
+    'P': 'AACG', 'Q': 'TATC', 'R': 'TACG', 'S': 'CATC', 'T': 'CACC',
+    'U': 'GATT', 'V': 'GACC', 'W': 'ATAA', 'X': 'ATTT', 'Y': 'ATCG',
+    'Z': 'ATGC', ' ': 'GGGG', '.': 'ATCC', ',': 'ATTA', '?': 'TTTA',
+    '0': 'TTAA', '1': 'TTTT', '2': 'TTCC', '3': 'TTGG', '4': 'CTAT',
+    '5': 'CTTG', '6': 'CTCC', '7': 'CTGA', '8': 'GTAT', '9': 'GTTG'
 }
 
 # Reverse table: maps DNA sequences back to their characters, including numbers

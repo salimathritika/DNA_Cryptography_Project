@@ -4,6 +4,11 @@ from tkinter import *
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from dna_decrypt import dna_decrypt_with_key
+from key_generation import generate_dynamic_key
+import random
+from dna_encoding import encode_to_dna, encoding_table,decode_from_dna, reverse_table
+
+round=16
 
 # Server class with GUI
 class ServerApp:
@@ -59,7 +64,11 @@ class ServerApp:
 
         # Receive encrypted message and decrypt it
         encrypted_message = conn.recv(1024).decode()
-        decrypted_message = dna_decrypt_with_key(encrypted_message, symmetric_key)
+        #decrypted_message = dna_decrypt_with_key(encrypted_message, symmetric_key)
+        decrypted_message = dna_decrypt_with_key(encrypted_message, symmetric_key, round)
+        decrypted_message = decode_from_dna(decrypted_message, reverse_table)
+        # if len(decrypted_message)%2!=0:
+        #   decrypted_message = decrypted_message[:len(decrypted_message) - 1]
 
         # Display decrypted message
         self.decrypted_msg_text.insert(END, decrypted_message)
