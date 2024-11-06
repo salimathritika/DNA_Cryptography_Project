@@ -7,8 +7,8 @@ import random
 from dna_encoding import encode_to_dna, encoding_table,decode_from_dna, reverse_table
 
 key=generate_dynamic_key(random.randint(4,100))
-round=random.randint(1,50)
-
+#round=random.randint(1,50)
+round=16
 
 def encrypt_text(pt):
     global flag

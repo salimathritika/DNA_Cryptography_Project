@@ -29,7 +29,12 @@ def dna_xor(base1, base2):
 
     return xor_table[(base1, base2)]
 
-
+def shift_left(dna_sequence, shift_by):
+    """
+    Shifts the DNA sequence to the left by `shift_by` positions.
+    """
+    shift_by = shift_by % len(dna_sequence)  # To handle shifts greater than the sequence length
+    return dna_sequence[shift_by:] + dna_sequence[:shift_by]
 
 def dna_decrypt_with_key(dna_sequence, key,rounds):
     #Remove introns
@@ -41,18 +46,20 @@ def dna_decrypt_with_key(dna_sequence, key,rounds):
     #Reverse transcription (convert mRNA back to DNA)
     reversed_dna = reverse_transcription(dna_sequence)
 
+    #DNA Sequence Shifting
+    for j in range(rounds):
+        reversed_dna = shift_left(reversed_dna, 1)
+
     #XOR-based decryption
     decrypted_dna=[]
-    for j in range(rounds):
-        decrypted_dna = []
-        for i in range(len(reversed_dna)):
-            key_base = key[i % len(key)]
-            decrypted_base = dna_xor(reversed_dna[i], key_base)
-            decrypted_dna.append(decrypted_base)
+    for i in range(len(reversed_dna)):
+        key_base = key[i % len(key)]
+        decrypted_base = dna_xor(reversed_dna[i], key_base)
+        decrypted_dna.append(decrypted_base)
 
     dec = ''.join(decrypted_dna)
 
-    #Decode decrypted DNA back to plaintext
-    #dec = decode_from_dna(decrypted_dna, reverse_table)
     
     return dec
+
+

@@ -17,17 +17,16 @@ def insert_introns(dna_sequence, intron_length=4):
     # Insert introns in the middle of the DNA sequence
     return dna_sequence[:half_len] + intron_sequence + dna_sequence[half_len:]
 
+def shift_right(dna_sequence, shift_by):
+    """
+    Shifts the DNA sequence to the right by `shift_by` positions.
+    """
+    shift_by = shift_by % len(dna_sequence)  # To handle shifts greater than the sequence length
+    return dna_sequence[-shift_by:] + dna_sequence[:-shift_by]
 
 def dna_xor(base1, base2):
     #XOR of two given DNA bases
-    """""
-    xor_table = {
-        ('A', 'A'): 'A', ('A', 'C'): 'C', ('A', 'G'): 'G', ('A', 'T'): 'T',
-        ('C', 'A'): 'C', ('C', 'C'): 'A', ('C', 'G'): 'T', ('C', 'T'): 'G',
-        ('G', 'A'): 'G', ('G', 'C'): 'T', ('G', 'G'): 'A', ('G', 'T'): 'C',
-        ('T', 'A'): 'T', ('T', 'C'): 'G', ('T', 'G'): 'C', ('T', 'T'): 'A',
-    }
-    """
+
     xor_table = {
         ('A', 'A'): 'A', ('A', 'C'): 'C', ('A', 'G'): 'G', ('A', 'T'): 'T', ('A', 'U'): 'U',
         ('C', 'A'): 'C', ('C', 'C'): 'A', ('C', 'G'): 'T', ('C', 'T'): 'G', ('C', 'U'): 'U',
@@ -46,14 +45,17 @@ def dna_encrypt_with_key(dna_sequence, key,rounds):
 
     #XOR-based encryption
     encrypted_dna = []
-    for j in range(rounds):
-        encrypted_dna=[]
-        for i in range(len(dna_sequence)):
-            key_base = key[i % len(key)]
-            encrypted_base = dna_xor(dna_sequence[i], key_base)
-            encrypted_dna.append(encrypted_base)
+    for i in range(len(dna_sequence)):
+        key_base = key[i % len(key)]
+        encrypted_base = dna_xor(dna_sequence[i], key_base)
+        encrypted_dna.append(encrypted_base)
 
     encrypted_dna = ''.join(encrypted_dna)
+
+
+    #DNA Sequence Shifting
+    for j in range(rounds):
+        encrypted_dna = shift_right(encrypted_dna, 1)
 
     #Transcription (convert to mRNA)
     transcribed_dna = transcription(encrypted_dna)

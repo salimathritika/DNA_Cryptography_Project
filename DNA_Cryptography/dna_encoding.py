@@ -1,15 +1,4 @@
-"""""
-encoding_table = {
-    'A': 'GACT', 'B': 'CGTA', 'C': 'TGCA', 'D': 'ATGC', 'E': 'CTGA',
-    'F': 'GATC', 'G': 'AGCT', 'H': 'TCGA', 'I': 'GTCA', 'J': 'CAGT',
-    'K': 'TACG', 'L': 'ACTG', 'M': 'TGAC', 'N': 'CAGC', 'O': 'TGCG',
-    'P': 'GCTA', 'Q': 'GTAT', 'R': 'CGAC', 'S': 'ACGT', 'T': 'CTAG',
-    'U': 'TCTA', 'V': 'TCCG', 'W': 'CGTG', 'X': 'GCAT', 'Y': 'ACGA',
-    'Z': 'TAGC', ' ': 'GGGG', '.': 'AAAA', ',': 'CCCC', '?': 'TTTT',
-    '0': 'AGGA', '1': 'TCAA', '2': 'CGTC', '3': 'GAAT', '4': 'TCAG',
-    '5': 'GAGA', '6': 'CTGC', '7': 'TGGT', '8': 'ACAC', '9': 'CATT'
-}
-"""
+
 encoding_table = {
     'A': 'AACC', 'B': 'AAGG', 'C': 'TAAT', 'D': 'TATG', 'E': 'TACC',
     'F': 'TAGA', 'G': 'CAAT', 'H': 'CATG', 'I': 'CACG', 'J': 'CAGT',
