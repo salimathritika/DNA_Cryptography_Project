@@ -13,7 +13,7 @@ from dna_encoding import encode_to_dna, encoding_table,decode_from_dna, reverse_
 import time
 
 key=generate_dynamic_key(random.randint(4,100))
-round=random.randint(1,50)
+round=16
 
 def aes_encrypt(pt, key):
     start=time.time()
