@@ -16,23 +16,23 @@ key=generate_dynamic_key(random.randint(4,100))
 round=16
 
 def aes_encrypt(pt, key):
-    start=time.time()
+    start=time.perf_counter()
     aes = AES.new(key, AES.MODE_ECB)
     pad_text = pad(pt.encode(), AES.block_size)  # Corrected the encode call
-    ct = aes.encrypt(pad_text)
-    stop=time.time()-start
-    return hexlify(ct).decode(), stop
+    aes_ct = aes.encrypt(pad_text)
+    stop=time.perf_counter()-start
+    return hexlify(aes_ct).decode(), stop
 
 def aes_decrypt(ct, key):
-    start = time.time()
+    start = time.perf_counter()
     aes = AES.new(key, AES.MODE_ECB)
     enc_bytes = unhexlify(ct)
-    dec = unpad(aes.decrypt(enc_bytes), AES.block_size)
-    stop = time.time() - start
-    return dec.decode(), stop
+    aes_dec = unpad(aes.decrypt(enc_bytes), AES.block_size)
+    stop = time.perf_counter() - start
+    return aes_dec.decode(), stop
 
 def dna_encrypt(pt):
-    start = time.time()
+    start = time.perf_counter()
     global flag
     flag=0
     if len(pt)%2==0:
@@ -41,16 +41,16 @@ def dna_encrypt(pt):
     dna_seq = encode_to_dna(pt, encoding_table)
     enc=dna_seq
     enc = dna_encrypt_with_key(enc, key,round)
-    stop = time.time() - start
+    stop = time.perf_counter() - start
     return enc, stop
 
 def dna_decrypt(ct):
-    start=time.time()
+    start=time.perf_counter()
     dec = dna_decrypt_with_key(ct, key,round)
     dec = decode_from_dna(dec, reverse_table)
     if flag==1:
         dec = dec[:len(dec)-1]
-    stop = time.time() - start
+    stop = time.perf_counter() - start
     return dec, stop
 
 aes_key = unhexlify("0123456789ABCDEF0123456789ABCDEF")
