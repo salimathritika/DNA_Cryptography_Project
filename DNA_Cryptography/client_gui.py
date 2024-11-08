@@ -59,7 +59,7 @@ class ClientApp:
        # encrypted_message = dna_encrypt_with_key(plaintext, symmetric_key)
         if len(plaintext) % 2 == 0:
             plaintext = plaintext + 'x'
-            # flag=1
+
         dna_seq = encode_to_dna(plaintext, encoding_table)
         encrypted_message = dna_seq
         encrypted_message = dna_encrypt_with_key(encrypted_message, symmetric_key, round)

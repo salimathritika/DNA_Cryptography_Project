@@ -1,6 +1,6 @@
 import random
 from dna_encoding import decode_from_dna, reverse_table
-from biological_processes import reverse_transcription,translation
+from biological_processes import reverse_transcription,translation, rev_translation
 
 
 def remove_introns(dna_sequence, intron_length=4):
@@ -41,7 +41,7 @@ def dna_decrypt_with_key(dna_sequence, key,rounds):
     dna_sequence = remove_introns(dna_sequence)
 
     #translation
-    dna_sequence=translation(dna_sequence)
+    dna_sequence=rev_translation(dna_sequence)
 
     #Reverse transcription (convert mRNA back to DNA)
     reversed_dna = reverse_transcription(dna_sequence)
@@ -61,5 +61,4 @@ def dna_decrypt_with_key(dna_sequence, key,rounds):
 
     
     return dec
-
 

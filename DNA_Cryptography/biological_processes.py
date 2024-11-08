@@ -13,3 +13,9 @@ def translation(mRNA_sequence):
     complements = {'A': 'U', 'U': 'A', 'C': 'G', 'G': 'C'}
     tRNA_sequence = ''.join([complements[base] for base in mRNA_sequence])
     return tRNA_sequence
+
+def rev_translation(mRNA_sequence):
+    # Convert mRNA to tRNA by finding complement (A->U, U->A, C->G, G->C)
+    complements = {'A': 'U', 'U': 'A', 'C': 'G', 'G': 'C','A':'T','T':'A'}
+    tRNA_sequence = ''.join([complements[base] for base in mRNA_sequence])
+    return tRNA_sequence

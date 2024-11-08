@@ -11,20 +11,20 @@ round=16
 # Server class with GUI
 class ServerApp:
     def __init__(self, master):
-        self.master = master
-        self.master.title("DNA Cryptography Server")
-        self.master.geometry("400x300")
+        self.master = master #set up main window
+        self.master.title("DNA Cryptography Server") #title of window
+        self.master.geometry("400x300") #size of window
 
         # Generate RSA keys
         self.private_key, self.public_key = self.generate_rsa_keys()
 
         # GUI Components
-        Label(master, text="Public Key:").pack()
-        self.pubkey_text = Text(master, height=5, width=40)
+        Label(master, text="Public Key:").pack() #label with text "Public Key:"
+        self.pubkey_text = Text(master, height=5, width=40) #text widget
         self.pubkey_text.pack()
-        self.pubkey_text.insert(END, self.public_key.export_key().decode())
+        self.pubkey_text.insert(END, self.public_key.export_key().decode()) #to display public key
 
-        Button(master, text="Start Server", command=self.start_server).pack()
+        Button(master, text="Start Server", command=self.start_server).pack() #button to start server
         self.msg_label = Label(master, text="Received Decrypted Message:")
         self.msg_label.pack()
         self.decrypted_msg_text = Text(master, height=5, width=40)
